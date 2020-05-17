@@ -4,12 +4,13 @@ import numpy as np
 def process(image):
     # h = image.shape[0] #h=480
     # w = image.shape[1] #w=640
+    
+    #Selecting lower area to eliminate noise in upper area
     pts = np.array([(0,200),(640,200),(640,480),(0,480)])
     msk = np.zeros_like(image)
     
     cv.fillPoly(msk, np.int32([pts]),(255.255,255))
     
-   
     fin = cv.bitwise_and(image,msk)
     #cv.imshow('fin',fin)
     blur = cv.GaussianBlur(fin, (5, 5), 0)
